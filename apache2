@@ -1,0 +1,53 @@
+Config Apashe2
+
+
+$ sudo mkdir -p /var/www/testdomain.info/html
+Modifiez maintenant la propriété et les autorisations à l'aide des commandes suivantes:
+
+$ sudo chown -R $USER:$USER /var/www/testdomain.info /html
+$ sudo chmod -R 755 /var/www/testdomain.info
+Nous allons maintenant créer un exemple de page d'index pour tester notre site testdomain.info. Pour ce faire, nous allons créer un fichier HTML à l'aide de l'éditeur nano comme suit:
+
+$ nano /var/www/testdomain.info/html/index.html
+
+Commande editeur nano
+Ctrl+O pour enrgistrer et Ctrl+X pour fermer le fichier
+
+
+Nous allons maintenant créer un fichier hôte virtuel qui servira le contenu de votre serveur à l'aide de la commande suivante:
+$ sudo nano /etc/apache2/sites-available/testdomain.info.conf
+
+
+Activer le fichier de configuration du domaine
+
+Now enable the virtual host file using the following command:
+$ sudo a2ensite testdomain.info.conf
+
+
+Now let’s disable the default Apache configurations using the following command:
+$ sudo a2dissite 000-default.conf
+
+To apply the changes, restart Apache2 service using the following command:
+$ sudo systemctl restart apache2
+
+
+
+
+Test pour vérifié si y’a des erreurs
+
+
+Now test the configuration for any syntax errors:
+$ sudo apache2ctl configtest
+
+
+After that run the following command:
+$ sudo a2enconf servername
+
+Now reload the Apache2:
+$ systemctl reload apache2
+
+Once done, again run the following command to test the configuration file:
+$ sudo apache2ctl configtest
+
+Now you will see the error has removed.
+
